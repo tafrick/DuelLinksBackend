@@ -32,4 +32,5 @@ app.use('/comments', commentRouter)
 const decksRouter = require('./routes/decks')
 app.use('/decks', decksRouter)
 
-app.listen(9000, () => console.log('Server Started'))
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, () => console.log('Server Started listening on: ' + PORT))
