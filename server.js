@@ -6,6 +6,7 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const router = express.Router()
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
@@ -19,6 +20,11 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
 
+app.use(router)
+app.get("/", (req, res) => {
+    res.send("Hello from root")
+})
+
 const boxesRouter = require('./routes/boxes')
 app.use(cors())
 app.use('/boxes', boxesRouter)
@@ -30,6 +36,7 @@ const commentRouter = require('./routes/comments')
 app.use('/comments', commentRouter)
 
 const decksRouter = require('./routes/decks')
+const router = require('./routes/boxes')
 app.use('/decks', decksRouter)
 
 const PORT = process.env.PORT || 9000;
